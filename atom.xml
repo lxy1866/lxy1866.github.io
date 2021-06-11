@@ -90,15 +90,16 @@
     <link href="https://blog.kaluna.top/2021/05/15/%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90Java%20%20Web%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/"/>
     <id>https://blog.kaluna.top/2021/05/15/%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90Java%20%20Web%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/</id>
     <published>2021-05-15T03:44:33.514Z</published>
-    <updated>2021-05-22T16:15:59.818Z</updated>
+    <updated>2021-06-11T10:38:10.835Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h1><p>用了一周的时间，终于看完了，我看的是许令波那一本《深入分析Java Web技术内幕》，总的来说作者经验很丰富。对于我这种新手来说，琢磨源码还是有点困难。书中有很多理论是围绕源码在展开，但是如果从未看过源码的人看了这本书，同时也没有自己主动琢磨，看一些博文加以理解或者没有总结的话，看了这本书也相当于白看。建议要看这本书的同学，先把设计模式学了，因为这本书的后面是把设计模式和框架一起结合着讲，先学完设计模式，再看这本书，一定收获更大。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h1><p>2021/5/23</p><p>用了一周的时间，终于看完了，我看的是许令波那一本《深入分析Java Web技术内幕》，总的来说作者经验很丰富。对于我这种新手来说，琢磨源码还是有点困难。书中有很多理论是围绕源码在展开，但是如果从未看过源码的人看了这本书，同时也没有自己主动琢磨，看一些博文加以理解或者没有总结的话，看了这本书也相当于白看。建议要看这本书的同学，先把设计模式学了，因为这本书的后面是把设计模式和框架一起结合着讲，先学完设计模式，再看这本书，一定收获更大。</p><p>2021/6/11</p><p>呜呜，我已经把书看完很久了，还没总结，我觉得我要忘光光了，但是如果现在总结就要和我目前的时间安排起冲突，我暑假再看看啦。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;感受&quot;&gt;&lt;a href=&quot;#感受&quot; class=&quot;headerlink&quot; title=&quot;感受&quot;&gt;&lt;/a&gt;感受&lt;/h1&gt;&lt;p&gt;用了一周的时间，终于看完了，我看的是许令波那一本《深入分析Java Web技术内幕》，总的来说作者经验很丰富。对于我这种新手来说，琢磨源码还
+        &lt;h1 id=&quot;感受&quot;&gt;&lt;a href=&quot;#感受&quot; class=&quot;headerlink&quot; title=&quot;感受&quot;&gt;&lt;/a&gt;感受&lt;/h1&gt;&lt;p&gt;2021/5/23&lt;/p&gt;
+&lt;p&gt;用了一周的时间，终于看完了，我看的是许令波那一本《深入分析Java Web技术内幕》，总的来说作者经验很丰
       
     
     </summary>
