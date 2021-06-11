@@ -1,0 +1,477 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Kafka学习笔记"><meta name="keywords" content="kafka"><meta name="author" content="Kaluna"><meta name="copyright" content="Kaluna"><title>Kafka学习笔记 | 嘿，不停转的轮子</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.7.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="嘿，不停转的轮子" type="application/atom+xml">
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式流处理平台Kafka大纲速览"><span class="toc-number">1.</span> <span class="toc-text">分布式流处理平台Kafka大纲速览</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#技术技术栈和环境说明"><span class="toc-number">1.1.</span> <span class="toc-text">技术技术栈和环境说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大纲速览"><span class="toc-number">1.2.</span> <span class="toc-text">大纲速览</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MQ消息中间件-JMS-AMQP核心知识"><span class="toc-number">2.</span> <span class="toc-text">MQ消息中间件+JMS+AMQP核心知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是MQ消息中间件和应用场景"><span class="toc-number">2.1.</span> <span class="toc-text">什么是MQ消息中间件和应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JMS消息服务和和常见核心概念"><span class="toc-number">2.2.</span> <span class="toc-text">JMS消息服务和和常见核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AMQP高级消息队列协议和MQTT科普"><span class="toc-number">2.3.</span> <span class="toc-text">AMQP高级消息队列协议和MQTT科普</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#业界主流消息队列和技术选型"><span class="toc-number">2.4.</span> <span class="toc-text">业界主流消息队列和技术选型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kafka核心概念-安装部署实战"><span class="toc-number">3.</span> <span class="toc-text">Kafka核心概念+安装部署实战</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式流处理平台kafka快速认知"><span class="toc-number">3.1.</span> <span class="toc-text">分布式流处理平台kafka快速认知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式流处理平台Kafka核心概念"><span class="toc-number">3.2.</span> <span class="toc-text">分布式流处理平台Kafka核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kafka相关环境准备和安装JDK8"><span class="toc-number">3.3.</span> <span class="toc-text">Kafka相关环境准备和安装JDK8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux环境下Zookeeper和Kafka安装启动"><span class="toc-number">3.4.</span> <span class="toc-text">Linux环境下Zookeeper和Kafka安装启动</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kafka点对点-发布订阅模型讲解和写入存储流程实战"><span class="toc-number">4.</span> <span class="toc-text">Kafka点对点-发布订阅模型讲解和写入存储流程实战</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Kafka命令行生产者发送消息和消费者消费消息实战"><span class="toc-number">4.1.</span> <span class="toc-text">Kafka命令行生产者发送消息和消费者消费消息实战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kafka点对点模型和发布订阅模型"><span class="toc-number">4.2.</span> <span class="toc-text">Kafka点对点模型和发布订阅模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kafka消费者组配置实现点对点消费模型"><span class="toc-number">4.3.</span> <span class="toc-text">Kafka消费者组配置实现点对点消费模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kafka消费者组配置实现发布订阅消费模型"><span class="toc-number">4.4.</span> <span class="toc-text">Kafka消费者组配置实现发布订阅消费模型</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Kaluna</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/lxy1866" target="_blank" rel="noopener">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">19</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">27</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">10</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210521080208.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">嘿，不停转的轮子</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/about">About</a><a class="site-page" href="/tags/">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a></span></div><div id="post-info"><div id="post-title">Kafka学习笔记</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-06-10</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/kafka/">kafka</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2021/06/10/Kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2021/06/10/Kafka学习笔记/"></span></a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="分布式流处理平台Kafka大纲速览"><a href="#分布式流处理平台Kafka大纲速览" class="headerlink" title="分布式流处理平台Kafka大纲速览"></a>分布式流处理平台Kafka大纲速览</h1><h2 id="技术技术栈和环境说明"><a href="#技术技术栈和环境说明" class="headerlink" title="技术技术栈和环境说明"></a>技术技术栈和环境说明</h2><ul>
+<li>Kafka版本：2.8.0</li>
+<li>Scala版本：2.13</li>
+<li>Zookeeper版本：3.7</li>
+<li>SpringBoot.2.5 + Maven + IDEA旗舰版 + JDK8 或 JDK11</li>
+</ul>
+<h2 id="大纲速览"><a href="#大纲速览" class="headerlink" title="大纲速览"></a>大纲速览</h2><ul>
+<li><p>高性能分布式流处理平台 Kafka核心知识+项目实战</p>
+</li>
+<li><p>Kakfa多种工作模式,点对点/发布订阅模型和应用场景</p>
+</li>
+<li><p>核心概念 生产者、消费者 Broker/Topic/Partition/leader/follower等</p>
+</li>
+<li><p>Linux服务器急速部署Zookeeper、Kafka，多种控制台操作指令，分区控制等</p>
+</li>
+<li><p>SpringBoot整合Kafka原生多个模块Admin/Producer/Consumer核心API+SpringKafka实战</p>
+</li>
+<li><p>高级篇-Kafka存储流程和原理讲解LEO+HW+Offset</p>
+</li>
+<li><p>高级篇-生产者发送消息模型、分区策略和核心配置实战，自定义分区Key策略等</p>
+</li>
+<li><p>高级篇-消费者消费消息模型、分区策略和重Rebalance实战等</p>
+<p>高级篇-Broker数据文件存储模型-ACK和副本可靠性原理分析+ISR模型</p>
+</li>
+<li><p>高级篇-高可用搭建Zookeeper集群+Kafka集群+SpringBoot项目整合和故障演练</p>
+</li>
+<li><p>高级篇-Kafka高性能原理分析ZeroCopy+多案例事务消息实战+大数据技术栈路线</p>
+</li>
+<li><p>Kafka架构+设计思想+底层原理+互联网大厂面试题等</p>
+</li>
+</ul>
+<h1 id="MQ消息中间件-JMS-AMQP核心知识"><a href="#MQ消息中间件-JMS-AMQP核心知识" class="headerlink" title="MQ消息中间件+JMS+AMQP核心知识"></a>MQ消息中间件+JMS+AMQP核心知识</h1><h2 id="什么是MQ消息中间件和应用场景"><a href="#什么是MQ消息中间件和应用场景" class="headerlink" title="什么是MQ消息中间件和应用场景"></a>什么是MQ消息中间件和应用场景</h2><ul>
+<li>什么是MQ消息中间件<ul>
+<li>全称MessageQueue，主要是用于程序和程序直接通信，异步+解耦</li>
+</ul>
+</li>
+<li>使用场景：<ul>
+<li>核心应用<ul>
+<li>解耦：订单系统-》物流系统</li>
+<li>异步：用户注册-》发送邮件，初始化信息</li>
+<li>削峰：秒杀、日志处理</li>
+</ul>
+</li>
+<li>跨平台 、多语言</li>
+<li>分布式事务、最终一致性</li>
+<li>RPC调用上下游对接，数据源变动-&gt;通知下属</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210610110809.png" alt="image-20210610110754781"></p>
+<h2 id="JMS消息服务和和常见核心概念"><a href="#JMS消息服务和和常见核心概念" class="headerlink" title="JMS消息服务和和常见核心概念"></a>JMS消息服务和和常见核心概念</h2><ul>
+<li><p>什么是JMS: Java消息服务（Java Message Service),Java平台中关于面向消息中间件的接口</p>
+<ul>
+<li><p>JMS是一种与厂商无关的 API，用来访问消息收发系统消息，它类似于JDBC(Java Database Connectivity)。这里，JDBC 是可以用来访问许多不同关系数据库的 API</p>
+</li>
+<li><p>是由Sun公司早期提出的消息标准，旨在为java应用提供统一的消息操作，包括create、send、receive</p>
+</li>
+<li><p>JMS是针对java的，那微软开发了NMS（.NET消息传递服务）</p>
+</li>
+<li><p>特性</p>
+<ul>
+<li>面向Java平台的标准消息传递API</li>
+<li>在Java或JVM语言比如Scala、Groovy中具有互用性</li>
+<li>无需担心底层协议</li>
+<li>有queues和topics两种消息传递模型</li>
+<li>支持事务、能够定义消息格式（消息头、属性和内容）</li>
+</ul>
+</li>
+<li><p>常见概念</p>
+<ul>
+<li>JMS提供者：连接面向消息中间件的，JMS接口的一个实现，RocketMQ,ActiveMQ,Kafka等等</li>
+<li>JMS生产者(Message Producer)：生产消息的服务</li>
+<li>JMS消费者(Message Consumer)：消费消息的服务</li>
+<li>JMS消息：数据对象</li>
+<li>JMS队列：存储待消费消息的区域</li>
+<li>JMS主题：一种支持发送消息给多个订阅者的机制</li>
+<li>JMS消息通常有两种类型：点对点（Point-to-Point)、发布/订阅（Publish/Subscribe）</li>
+</ul>
+</li>
+<li><p>基础编程模型</p>
+<ul>
+<li>MQ中需要用的一些类</li>
+<li>ConnectionFactory ：连接工厂，JMS 用它创建连接</li>
+<li>Connection ：JMS 客户端到JMS Provider 的连接</li>
+<li>Session： 一个发送或接收消息的线程</li>
+<li>Destination ：消息的目的地;消息发送给谁.</li>
+<li>MessageConsumer / MessageProducer： 消息消费者，消息生产者</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210610110915.png" alt="image-20210610110913772"></p>
+<h2 id="AMQP高级消息队列协议和MQTT科普"><a href="#AMQP高级消息队列协议和MQTT科普" class="headerlink" title="AMQP高级消息队列协议和MQTT科普"></a>AMQP高级消息队列协议和MQTT科普</h2><ul>
+<li>背景<ul>
+<li>JMS或者NMS都没有标准的底层协议，API是与编程语言绑定的，每个消息队列厂商就存在多种不同格式规范的产品，对使用者就产生了很多问题, AMQP解决了这个问题，它使用了一套标准的底层协议</li>
+</ul>
+</li>
+<li>什么是AMQP<ul>
+<li>AMQP（advanced message queuing protocol）在2003年时被提出，最早用于解决金融领不同平台之间的消息传递交互问题,就是是一种协议，兼容JMS</li>
+<li>更准确说的链接协议 binary- wire-level-protocol 直接定义网络交换的数据格式，类似http</li>
+<li>具体的产品实现比较多，RabbitMQ就是其中一种</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210610111447.png" alt="image-20210610111444397"></p>
+<ul>
+<li>特性<ul>
+<li>独立于平台的底层消息传递协议</li>
+<li>消费者驱动消息传递</li>
+<li>跨语言和平台的互用性、属于底层协议</li>
+<li>有5种交换类型direct，fanout，topic，headers，system</li>
+<li>面向缓存的、可实现高性能、支持经典的消息队列，循环，存储和转发</li>
+<li>支持长周期消息传递、支持事务（跨消息队列）</li>
+</ul>
+</li>
+<li>AMQP和JMS的主要区别<ul>
+<li>AMQP不从API层进行限定，直接定义网络交换的数据格式,这使得实现了AMQP的provider天然性就是跨平台</li>
+<li>比如Java语言产生的消息，可以用其他语言比如python的进行消费</li>
+<li>AQMP可以用http来进行类比，不关心实现接口的语言，只要都按照相应的数据格式去发送报文请求，不同语言的client可以和不同语言的server进行通讯</li>
+<li>JMS消息类型：TextMessage/ObjectMessage/StreamMessage等</li>
+<li>AMQP消息类型：Byte[]</li>
+</ul>
+</li>
+<li>MQTT<ul>
+<li>MQTT: 消息队列遥测传输（Message Queueing Telemetry Transport ）</li>
+<li>背景：<ul>
+<li>我们有面向基于Java的企业应用的JMS和面向所有其他应用需求的AMQP，那这个MQTT是做啥的？</li>
+</ul>
+</li>
+<li>原因<ul>
+<li>计算性能不高的设备不能适应AMQP上的复杂操作,MQTT它是专门为小设备设计的</li>
+<li>MQTT主要是是物联网（IOT）中大量的使用</li>
+</ul>
+</li>
+<li>特性<ul>
+<li>内存占用低，为小型无声设备之间通过低带宽发送短消息而设计</li>
+<li>不支持长周期存储和转发，不允许分段消息（很难发送长消息）</li>
+<li>支持主题发布-订阅、不支持事务（仅基本确认）</li>
+<li>消息实际上是短暂的（短周期）</li>
+<li>简单用户名和密码、不支持安全连接、消息不透明</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="业界主流消息队列和技术选型"><a href="#业界主流消息队列和技术选型" class="headerlink" title="业界主流消息队列和技术选型"></a>业界主流消息队列和技术选型</h2><ul>
+<li><p>业界主流的消息队列：Apache ActiveMQ、Kafka、RabbitMQ、RocketMQ</p>
+<ul>
+<li><p>ActiveMQ：<a href="http://activemq.apache.org/" target="_blank" rel="noopener">http://activemq.apache.org/</a></p>
+<ul>
+<li><p>Apache出品，历史悠久，支持多种语言的客户端和协议，支持多种语言Java, .NET, C++ 等</p>
+</li>
+<li><p>基于JMS Provider的实现</p>
+</li>
+<li><p>缺点：吞吐量不高，多队列的时候性能下降，存在消息丢失的情况，比较少大规模使用</p>
+</li>
+</ul>
+</li>
+<li><p>Kafka：<a href="http://kafka.apache.org/" target="_blank" rel="noopener">http://kafka.apache.org/</a></p>
+<ul>
+<li>是由Apache软件基金会开发的一个开源流处理平台，由Scala和Java编写。Kafka是一种高吞吐量的分布式发布订阅消息系统(严格意义上是不属于队列产品，是一个流处理平台)，它可以处理大规模的网站中的所有动作流数据(网页浏览，搜索和其他用户的行动)，副本集机制，实现数据冗余，保障数据尽量不丢失；支持多个生产者和消费者</li>
+<li>类似MQ，功能较为简单，主要支持常规的MQ功能</li>
+</ul>
+</li>
+<li><p>它提供了类似于JMS的特性，但是在设计实现上完全不同，它并不是JMS规范的实现</p>
+</li>
+<li><p>缺点：运维难度大，文档比较少, 需要掌握Scala</p>
+</li>
+</ul>
+</li>
+<li><p>RocketMQ：<a href="http://rocketmq.apache.org/" target="_blank" rel="noopener">http://rocketmq.apache.org/</a></p>
+<ul>
+<li><p>阿里开源的一款的消息中间件, 纯Java开发，具有高吞吐量、高可用性、适合大规模分布式系统应用的特点, 性能强劲(零拷贝技术)，支持海量堆积, 支持指定次数和时间间隔的失败消息重发,支持consumer端tag过滤、延迟消息等，在阿里内部进行大规模使用，适合在电商，互联网金融等领域</p>
+</li>
+<li><p>基于JMS Provider的实现</p>
+</li>
+<li><p>缺点：社区相对不活跃，更新比较快，纯java支持</p>
+</li>
+<li><p>RabbitMQ：<a href="http://www.rabbitmq.com/" target="_blank" rel="noopener">http://www.rabbitmq.com/</a></p>
+<ul>
+<li>是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端，如：Python、Ruby、.NET、Java、C、用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不错</li>
+<li>缺点：使用Erlang开发，阅读和修改源码难度大</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Kafka核心概念-安装部署实战"><a href="#Kafka核心概念-安装部署实战" class="headerlink" title="Kafka核心概念+安装部署实战"></a>Kafka核心概念+安装部署实战</h1><h2 id="分布式流处理平台kafka快速认知"><a href="#分布式流处理平台kafka快速认知" class="headerlink" title="分布式流处理平台kafka快速认知"></a>分布式流处理平台kafka快速认知</h2><p>Kafka</p>
+<ul>
+<li><p>Kafka是最初由Linkedin公司开发，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目，也是一个开源【分布式流处理平台】，由Scala和Java编写，（也当做MQ系统，但不是纯粹的消息系统）</p>
+<ul>
+<li>open-source distributed event streaming platform</li>
+</ul>
+</li>
+<li><p>核心：一种高吞吐量的分布式流处理平台，它可以处理消费者在网站中的所有动作流数据。</p>
+<ul>
+<li>比如 网页浏览，搜索和其他用户的行为等，应用于大数据实时处理领域</li>
+</ul>
+</li>
+<li><p>官网：<a href="http://kafka.apache.org/" target="_blank" rel="noopener">http://kafka.apache.org/</a></p>
+</li>
+<li><p>快速开始：<a href="http://kafka.apache.org/quickstart" target="_blank" rel="noopener">http://kafka.apache.org/quickstart</a></p>
+</li>
+<li><p>快速认识概念</p>
+<ul>
+<li>Broker<ul>
+<li>Kafka的服务端程序，可以认为一个mq节点就是一个broker</li>
+<li>broker存储topic的数据</li>
+</ul>
+</li>
+<li>Producer生产者<ul>
+<li>创建消息Message，然后发布到MQ中</li>
+<li>该角色将消息发布到Kafka的topic中</li>
+</ul>
+</li>
+<li>Consumer消费者:<ul>
+<li>消费队列里面的消息</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://file.xdclass.net/note/2021/kafka/img/Untitled%20Diagram.png" alt="Untitled Diagram"></p>
+</li>
+</ul>
+<h2 id="分布式流处理平台Kafka核心概念"><a href="#分布式流处理平台Kafka核心概念" class="headerlink" title="分布式流处理平台Kafka核心概念"></a>分布式流处理平台Kafka核心概念</h2><p>核心概念</p>
+<ul>
+<li>Broker<ul>
+<li>Kafka的服务端程序，可以认为一个mq节点就是一个broker</li>
+<li>broker存储topic的数据</li>
+</ul>
+</li>
+<li>Producer生产者<ul>
+<li>创建消息Message，然后发布到MQ中</li>
+<li>该角色将消息发布到Kafka的topic中</li>
+</ul>
+</li>
+<li>Consumer消费者:<ul>
+<li>消费队列里面的消息</li>
+</ul>
+</li>
+<li>ConsumerGroup消费者组<ul>
+<li>同个topic, 广播发送给不同的group，一个group中只有一个consumer可以消费此消息</li>
+</ul>
+</li>
+<li>Topic<ul>
+<li>每条发布到Kafka集群的消息都有一个类别，这个类别被称为Topic，主题的意思</li>
+</ul>
+</li>
+<li>Partition分区<ul>
+<li>kafka数据存储的基本单元，topic中的数据分割为一个或多个partition，每个topic至少有一个partition，是有序的</li>
+<li>一个Topic的多个partitions, 被分布在kafka集群中的多个server上</li>
+<li>消费者数量 &lt;=小于或者等于Partition数量</li>
+</ul>
+</li>
+<li>Replication 副本（备胎）<ul>
+<li>同个Partition会有多个副本replication ，多个副本的数据是一样的，当其他broker挂掉后，系统可以主动用副本提供服务</li>
+<li>默认每个topic的副本都是1（默认是没有副本，节省资源），也可以在创建topic的时候指定</li>
+<li>如果当前kafka集群只有3个broker节点，则replication-factor最大就是3了，如果创建副本为4，则会报错</li>
+</ul>
+</li>
+<li>ReplicationLeader、ReplicationFollower<ul>
+<li>Partition有多个副本，但只有一个replicationLeader负责该Partition和生产者消费者交互</li>
+<li>ReplicationFollower只是做一个备份，从replicationLeader进行同步</li>
+</ul>
+</li>
+<li>ReplicationManager<ul>
+<li>负责Broker所有分区副本信息，Replication 副本状态切换</li>
+</ul>
+</li>
+<li>offset<ul>
+<li>每个consumer实例需要为他消费的partition维护一个记录自己消费到哪里的偏移offset</li>
+<li>kafka把offset保存在消费端的消费者组里</li>
+</ul>
+</li>
+<li>特点总结<ul>
+<li>多订阅者<ul>
+<li>一个topic可以有一个或者多个订阅者</li>
+<li>每个订阅者都要有一个partition，所以订阅者数量要少于等于partition数量</li>
+</ul>
+</li>
+<li>高吞吐量、低延迟: 每秒可以处理几十万条消息</li>
+<li>高并发：几千个客户端同时读写</li>
+<li>容错性：多副本、多分区，允许集群中节点失败，如果副本数据量为n,则可以n-1个节点失败</li>
+<li>扩展性强：支持热扩展</li>
+</ul>
+</li>
+<li>基于消费者组可以实现：<ul>
+<li>基于队列的模型：所有消费者都在同一消费者组里，每条消息只会被一个消费者处理</li>
+<li>基于发布订阅模型：消费者属于不同的消费者组，假如每个消费者都有自己的消费者组，这样kafka消息就能广播到所有消费者实例上</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kafka相关环境准备和安装JDK8"><a href="#Kafka相关环境准备和安装JDK8" class="headerlink" title="Kafka相关环境准备和安装JDK8"></a>Kafka相关环境准备和安装JDK8</h2><ul>
+<li><p>需要的软件和环境版本说明</p>
+<ul>
+<li>kafka-xx-yy<ul>
+<li>xx 是scala版本，yy是kafka版本（scala是基于jdk开发，需要安装jdk环境）</li>
+<li>下载地址：<a href="http://kafka.apache.org/downloads" target="_blank" rel="noopener">http://kafka.apache.org/downloads</a></li>
+</ul>
+</li>
+<li>zookeeper<ul>
+<li>Apache 软件基金会的一个软件项目，它为大型分布式计算提供开源的分布式配置服务、同步服务和命名注册</li>
+<li>下载地址：<a href="https://zookeeper.apache.org/releases.html" target="_blank" rel="noopener">https://zookeeper.apache.org/releases.html</a></li>
+</ul>
+</li>
+<li>jdk1.8</li>
+</ul>
+</li>
+<li><p>步骤</p>
+<ul>
+<li><p>上传安装包（zk、jdk、kafka）</p>
+</li>
+<li><p>安装jdk</p>
+<ul>
+<li><p>配置全局环境变量</p>
+<ul>
+<li><p>解压：tar -zxvf jdk-8u181-linux-x64.tar.gz</p>
+</li>
+<li><p>重命名</p>
+</li>
+<li><p>vim /etc/profile</p>
+</li>
+<li><p>配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/local/software/jdk1.8</span><br><span class="line">CLASSPATH=$JAVA_HOME/lib/</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export PATH JAVA_HOME CLASSPATH</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>环境变量立刻生效</p>
+<ul>
+<li>source /etc/profile</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>查看安装情况 java -version</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Linux环境下Zookeeper和Kafka安装启动"><a href="#Linux环境下Zookeeper和Kafka安装启动" class="headerlink" title="Linux环境下Zookeeper和Kafka安装启动"></a>Linux环境下Zookeeper和Kafka安装启动</h2><ul>
+<li><p>安装Zookeeper (默认2181端口)</p>
+<ul>
+<li>默认配置文件 zoo.cfg</li>
+<li>启动zk<ul>
+<li>bin/zkServer.sh start</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>安装Kafka (默认 9092端口)</p>
+<ul>
+<li><p>config目录下 server.properties</p>
+<img src="https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210610113205.png" alt="image-20210610113152510" style="zoom: 67%;" />
+
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#标识broker编号，集群中有多个broker，则每个broker的编号需要设置不同</span></span><br><span class="line"><span class="meta">broker.id</span>=<span class="string">0</span></span><br><span class="line"><span class="comment">#修改下面两个配置 ( listeners 配置的ip和advertised.listeners相同时启动kafka会报错)</span></span><br><span class="line"><span class="attr">listeners(内网Ip)</span></span><br><span class="line"><span class="attr">advertised.listeners(公网ip)</span></span><br><span class="line"><span class="comment">#修改zk地址,默认地址</span></span><br><span class="line"><span class="meta">zookeeper.connection</span>=<span class="string">localhost:2181</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>bin目录启动和停止</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动</span></span><br><span class="line">./kafka-server-start.sh  ../config/server.properties &amp;</span><br><span class="line"><span class="comment">#停止</span></span><br><span class="line">kafka-server-stop.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --create --zookeeper 101.132.252.118:2181 --replication-factor 1 --partitions 1 --topic xdclass-topic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --list --zookeeper 101.132.252.118:2181</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux环境下daemon守护进程运行Kafka</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-server-start.sh -daemon ../config/server.properties &amp;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Kafka点对点-发布订阅模型讲解和写入存储流程实战"><a href="#Kafka点对点-发布订阅模型讲解和写入存储流程实战" class="headerlink" title="Kafka点对点-发布订阅模型讲解和写入存储流程实战"></a>Kafka点对点-发布订阅模型讲解和写入存储流程实战</h1><h2 id="Kafka命令行生产者发送消息和消费者消费消息实战"><a href="#Kafka命令行生产者发送消息和消费者消费消息实战" class="headerlink" title="Kafka命令行生产者发送消息和消费者消费消息实战"></a>Kafka命令行生产者发送消息和消费者消费消息实战</h2><ul>
+<li><p>创建topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/software/kafka/bin</span><br><span class="line">./kafka-topics.sh --create --zookeeper 101.132.252.118:2181 --replication-factor 1 --partitions 2 --topic xdclass-topic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --list --zookeeper 101.132.252.118:2181</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生产者发送消息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-producer.sh --broker-list 101.132.252.118:9092  --topic version1-topic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>消费者消费消息 ( –from-beginning：会把主题中以往所有的数据都读取出来, 重启后会有这个重复消费）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-consumer.sh --bootstrap-server 101.132.252.118:9092 --from-beginning --topic version1-topic</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210610114448.png" alt="image-20210610114445032"></p>
+</li>
+<li><p>删除topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --zookeeper 101.132.252.118:2181 --delete --topic t1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看broker节点topic状态信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --describe --zookeeper 101.132.252.118:2181  --topic xdclass-topic</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="Kafka点对点模型和发布订阅模型"><a href="#Kafka点对点模型和发布订阅模型" class="headerlink" title="Kafka点对点模型和发布订阅模型"></a>Kafka点对点模型和发布订阅模型</h2><ul>
+<li>JMS规范目前支持两种消息模型<ul>
+<li>点对点（point to point)<ul>
+<li>消息生产者生产消息发送到queue中，然后消息消费者从queue中取出并且消费消息</li>
+<li>消息被消费以后，queue中不再有存储，所以消息消费者不可能消费到已经被消费的消息。 Queue支持存在多个消费者，但是对一个消息而言，只会有一个消费者可以消费</li>
+</ul>
+</li>
+<li>发布/订阅（publish/subscribe）<ul>
+<li>消息生产者（发布）将消息发布到topic中，同时有多个消息消费者（订阅）消费该消息。</li>
+<li>和点对点方式不同，发布到topic的消息会被所有订阅者消费。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210610130420.png" alt="image-20210610130417875"></p>
+<h2 id="Kafka消费者组配置实现点对点消费模型"><a href="#Kafka消费者组配置实现点对点消费模型" class="headerlink" title="Kafka消费者组配置实现点对点消费模型"></a>Kafka消费者组配置实现点对点消费模型</h2><ul>
+<li><p>编辑消费者配置（确保同个名称group.id一样）</p>
+<ul>
+<li>编辑 config/consumer.properties</li>
+</ul>
+</li>
+<li><p>创建topic, 1个分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --create --zookeeper 112.74.55.160:2181 --replication-factor 1 --partitions 2 --topic xdclass-topic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定配置文件启动 两个消费者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-consumer.sh --bootstrap-server 101.132.252.118:9092 --from-beginning --topic xdclass-topic --consumer.config ../config/consumer.properties</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现象</p>
+<ul>
+<li>只有一个消费者可以消费到数据，一个分区只能被同个消费者组下的某个消费者进行消费</li>
+</ul>
+</li>
+</ul>
+<img src="https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210610132352.png" alt="image-20210610132337485" style="zoom: 67%;" />
+
+<h2 id="Kafka消费者组配置实现发布订阅消费模型"><a href="#Kafka消费者组配置实现发布订阅消费模型" class="headerlink" title="Kafka消费者组配置实现发布订阅消费模型"></a>Kafka消费者组配置实现发布订阅消费模型</h2><ul>
+<li><p>编辑消费者配置（确保group.id 不一样）</p>
+<ul>
+<li>cp config/consumer.properties config/consumer-1.properties</li>
+<li>cp config/consumer.properties config/consumer-2.properties</li>
+<li>编辑 config/consumer-1.properties，修改</li>
+<li>编辑 config/consumer-2.properties</li>
+</ul>
+</li>
+<li><p>创建topic, 2个分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-topics.sh --create --zookeeper 101.132.252.118:2181 --replication-factor 1 --partitions 1--topic xdclass-topic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生产者生产消息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-producer.sh --broker-list 101.132.252.118:9092  --topic xdclass-topic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定配置文件启动 两个消费者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./kafka-console-consumer.sh --bootstrap-server 101.132.252.118:9092 --from-beginning --topic xdclass-topic --consumer.config ../config/consumer1.properties</span><br><span class="line"></span><br><span class="line">./kafka-console-consumer.sh --bootstrap-server 101.132.252.118:9092 --from-beginning --topic xdclass-topic --consumer.config ../config/consumer2.properties</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="C:/Users/86158/AppData/Roaming/Typora/typora-user-images/image-20210610134550679.png" alt="image-20210610134550679"></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Kaluna</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://blog.kaluna.top/2021/06/10/Kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://blog.kaluna.top/2021/06/10/Kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/kafka/">kafka</a></div><div class="post-qr-code"><div class="post-qr-code-item"><img class="post-qr-code__img" src="https://i.loli.net/2021/04/20/FbPtxEHeSDgCXBy.jpg"><div class="post-qr-code__desc">添加我为好友</div></div></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2021/06/11/%E9%87%8D%E6%96%B0%E5%BB%BA%E7%AB%8B%E5%88%B7%E9%A2%98%E7%9B%AE%E6%A0%87/"><i class="fa fa-chevron-left">  </i><span>重新建立刷题目标</span></a></div><div class="next-post pull-right"><a href="/2021/06/01/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98Redis6.X+%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/"><span>分布式缓存Redis6.X+高可用集群</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://blog.kaluna.top/2021/06/10/Kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/';
+  this.page.identifier = '2021/06/10/Kafka学习笔记/';
+  this.page.title = 'Kafka学习笔记';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'shortname-pzy8cndfkq' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-scr" src="https://shortname-pzy8cndfkq.disqus.com/count.js" async></script></div></div><footer class="footer-bg" style="background-image: url(https://gitee.com/YuerryHUAHUA/figure/raw/master/img/20210521080208.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2021 By Kaluna</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="icp"><a><span></span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.7.0"></script><script src="/js/fancybox.js?version=1.7.0"></script><script src="/js/sidebar.js?version=1.7.0"></script><script src="/js/copy.js?version=1.7.0"></script><script src="/js/fireworks.js?version=1.7.0"></script><script src="/js/transition.js?version=1.7.0"></script><script src="/js/scroll.js?version=1.7.0"></script><script src="/js/head.js?version=1.7.0"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
