@@ -228,13 +228,6 @@
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/tags/DNS/</loc>
-    <lastmod>2021-06-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.kaluna.top/tags/jdk/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
@@ -243,6 +236,20 @@
   
   <url>
     <loc>https://blog.kaluna.top/tags/ubuntu/</loc>
+    <lastmod>2021-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kaluna.top/tags/nginx/</loc>
+    <lastmod>2021-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kaluna.top/tags/DNS/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -277,14 +284,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/tags/nginx/</loc>
-    <lastmod>2021-06-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kaluna.top/tags/ssm/</loc>
+    <loc>https://blog.kaluna.top/tags/spring-framework/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -298,7 +298,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/tags/spring-framework/</loc>
+    <loc>https://blog.kaluna.top/tags/ssm/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -313,6 +313,13 @@
   
   <url>
     <loc>https://blog.kaluna.top/tags/HashMap/</loc>
+    <lastmod>2021-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kaluna.top/tags/kafka/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -375,7 +382,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/tags/kafka/</loc>
+    <loc>https://blog.kaluna.top/tags/RabbitMQ/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -383,13 +390,6 @@
   
   <url>
     <loc>https://blog.kaluna.top/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2021-06-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.kaluna.top/tags/RabbitMQ/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -405,14 +405,21 @@
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
+    <loc>https://blog.kaluna.top/categories/Linux%E5%AE%9E%E6%88%98/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/categories/Linux%E5%AE%9E%E6%88%98/</loc>
+    <loc>https://blog.kaluna.top/categories/nginx/</loc>
+    <lastmod>2021-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kaluna.top/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -440,13 +447,6 @@
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/categories/nginx/</loc>
-    <lastmod>2021-06-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.kaluna.top/categories/%E8%AF%BB%E5%90%8E%E6%84%9F/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
@@ -461,13 +461,6 @@
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/categories/Alibaba-Cloud/</loc>
-    <lastmod>2021-06-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.kaluna.top/categories/kafka/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
@@ -475,7 +468,7 @@
   </url>
   
   <url>
-    <loc>https://blog.kaluna.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>https://blog.kaluna.top/categories/Alibaba-Cloud/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -483,6 +476,13 @@
   
   <url>
     <loc>https://blog.kaluna.top/categories/MQ%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/</loc>
+    <lastmod>2021-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.kaluna.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
