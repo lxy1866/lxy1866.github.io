@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://blog.kaluna.top/2021/06/30/JDK8-13%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
+    <lastmod>2021-07-01</lastmod>
+  </url>
+  <url>
     <loc>https://blog.kaluna.top/2021/06/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/</loc>
     <lastmod>2021-06-18</lastmod>
   </url>
